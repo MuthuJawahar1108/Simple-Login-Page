@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        // let count = 1;
+        let username = document.getElementsByClassName("sign-up-inputs")[0];
+        let email = document.getElementsByClassName("sign-up-inputs")[1];
+        let password = document.getElementsByClassName("sign-up-inputs")[2];
+        let signupButton = document.getElementById("signup");
+
+        const user = {
+            "username" : username.textContent,
+            "email" : email.textContent,
+            "password" : password.textContent
+        }
+        console.log(user);
+        
+        signupButton.addEventListener("click",()=>{
+            localStorage.setItem(user.username,JSON.stringify(user));
+        });
+
+    </script>
+    <div class="overall-container">
+        <div class="left-section">
+            <img src="images/sign-up.jpg" alt="signup">
+        </div>
+        <div class="right-section">
+            <p id="heading" style="color: rgb(226, 43, 214);">Sign Up</p>
+            <p class="labels">Username</p>
+            <input type="text" class="sign-up-inputs">
+            <p class="labels">Email</p>
+            <input type="email" class="sign-up-inputs">
+            <p class="labels">Password</p>
+            <input type="password" class="sign-up-inputs">
+            <button id="signup">Sign-up</button>
+            <p id="existing-user">Already have an account? Click <a href="../index.html">here</a> to Log In</p>
+        </div>
+    </div>
+    
+</body>
+</html>
