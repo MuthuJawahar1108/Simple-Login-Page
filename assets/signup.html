@@ -49,8 +49,8 @@
                 const value = JSON.parse(localStorage.getItem(key));
                 // console.log(value);
                 if(value.email===user.email){
-                    alert("Email already exists! Try again");
                     username.value=email.value=password.value="";
+                    alert("Email already exists! Try again");
                     isPresent = true;
                     break;
                 }

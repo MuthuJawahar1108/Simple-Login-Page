@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <script>
-        
-    </script>
+
     <div class="overall-container">
         <div class="left-section">
             <img src="./assets/images/login_img.jpg" alt="login">
@@ -24,5 +22,35 @@
             <p id="new-user">New User? Click <a href="./assets/signup.html">here</a> to Sign Up</p>
         </div>
     </div>
+    <script>
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+        let loginButton = document.getElementById("login");
+        console.log(loginButton);
+
+        loginButton.addEventListener("click",()=>{
+            const user_name = username.value;
+            const pass_word = password.value;
+            let isMatch = 0;
+            for(let i=0; i<localStorage.length; i++){
+                const key = localStorage.key(i);
+                const value = JSON.parse(localStorage.getItem(key));
+                console.log(value.username,user_name);
+                console.log(value.password,pass_word);
+                if(value.username===user_name && value.password===pass_word){
+                    isMatch=1;
+                    break;
+                }
+            }
+            if(isMatch){
+                alert("Login Success!");
+            }
+            else{
+                username.value=password.value="";
+                alert("Invalid Username or Password! Please try again!");
+            }
+        });
+
+    </script>
 </body>
 </html>
