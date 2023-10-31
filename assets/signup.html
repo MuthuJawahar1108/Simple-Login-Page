@@ -7,25 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script>
-        // let count = 1;
-        let username = document.getElementsByClassName("sign-up-inputs")[0];
-        let email = document.getElementsByClassName("sign-up-inputs")[1];
-        let password = document.getElementsByClassName("sign-up-inputs")[2];
-        let signupButton = document.getElementById("signup");
-
-        const user = {
-            "username" : username.textContent,
-            "email" : email.textContent,
-            "password" : password.textContent
-        }
-        console.log(user);
-        
-        signupButton.addEventListener("click",()=>{
-            localStorage.setItem(user.username,JSON.stringify(user));
-        });
-
-    </script>
+    
     <div class="overall-container">
         <div class="left-section">
             <img src="images/sign-up.jpg" alt="signup">
@@ -42,6 +24,44 @@
             <p id="existing-user">Already have an account? Click <a href="../index.html">here</a> to Log In</p>
         </div>
     </div>
-    
+    <script >
+        // let count = 1;
+        // const uuidv4 = require("uuid/v4");
+        let username = document.getElementsByClassName("sign-up-inputs")[0];
+        let email = document.getElementsByClassName("sign-up-inputs")[1];
+        let password = document.getElementsByClassName("sign-up-inputs")[2];
+        let signupButton = document.getElementById("signup");
+        // console.log(username,email,password,signupButton);
+        // console.log(username);
+
+        
+        signupButton.addEventListener("click",()=>{
+            const user = {
+                "_id" : this.crypto.randomUUID(),
+                "username" : username.value,
+                "email" : email.value,
+                "password" : password.value
+            }
+            console.log(user.email);
+            let isPresent = false;
+            for(let i=0; i< localStorage.length; i++){
+                const key = localStorage.key(i);
+                const value = JSON.parse(localStorage.getItem(key));
+                // console.log(value);
+                if(value.email===user.email){
+                    alert("Email already exists! Try again");
+                    username.value=email.value=password.value="";
+                    isPresent = true;
+                    break;
+                }
+            }
+            if(!isPresent) {
+                localStorage.setItem(user._id,JSON.stringify(user));
+                username.value=email.value=password.value="";
+                alert("Successfully registered! Log In to continue!");
+            }
+        });
+
+    </script>
 </body>
 </html>
